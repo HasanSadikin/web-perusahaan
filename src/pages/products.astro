@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.vue";
+import Productse from "../components/Products.vue";
+import Footer from "../components/Footer.astro";
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="PT. Azaku Nusantara Green">
+	<Navbar client:only path={currentPath} color="text-white"/>
+    <Productse client:load />
+    <Footer />
+</Layout>

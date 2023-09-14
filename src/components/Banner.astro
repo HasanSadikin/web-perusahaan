@@ -1,0 +1,24 @@
+---
+const { image, myClass } = Astro.props 
+---
+
+<div class="h-screen w-screen bg-yellow-500 relative">
+    <img src={image} alt="" class="object-cover h-full w-full">
+    <div class=`absolute bottom-0 left-0 h-32 w-screen z-[1] ${myClass}`></div>
+    <div class="absolute top-0 left-0 w-full h-full black-screen"></div>
+    <slot />
+</div>
+
+<style scoped>
+.black-screen {
+    background-color: rgba(0, 0, 0, .65);
+}
+
+.green-fade {
+    background-image: linear-gradient(to top, rgba(62, 137, 20, 1), rgba(62, 137, 20, 0));
+}
+
+.white-fade {
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+</style>
