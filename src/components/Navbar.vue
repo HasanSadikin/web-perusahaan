@@ -29,8 +29,8 @@ window.addEventListener('scroll', handleScroll)
 </script>
 
 <template>
-    <div class="sticky top-0 z-10">
-        <div :class="['absolute w-screen h-16 bg-yellow-500 flex justify-start items-center px-5 drop-shadow-md ease-in-out duration-300', navActive ? 'bg-secondary' : '']">
+    <!-- <div class="sticky top-0 z-10">
+        <div :class="['absolute w-screen h-16 flex justify-start items-center px-5 drop-shadow-md ease-in-out duration-300', navActive ? 'bg-secondary' : '']">
             <h2 :class="['text-2xl font-bold', props.color]">ANG</h2>
         </div>
         <div :class="[`absolute top-0 ease-in-out duration-200 min-h-screen w-screen bg-secondary flex-col justify-center items-center`, toggleClass ? 'left-0' : 'left-[-100%]']">
@@ -70,6 +70,25 @@ window.addEventListener('scroll', handleScroll)
                 </svg>
             </div>
         </div>
+    </div> -->
+    <div class="bg-yellow-500">
+        <div class="bg-yellow-500 h-16 w-5/6 flex items-center justify-between mx-auto nav">
+            <h1 class="font-bold text-2xl">
+                ANG
+            </h1>
+            <ul :class="['absolute top-16 w-full h-screen bg-yellow-500 ease-in-out duration-300 md:h-fit md:w-fit md:flex md:items-center md:justify-center md:static md:py-0',
+                        toggleClass ? 'left-0' : 'left-[-100%]']">
+                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Home</li>
+                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">About Us</li>
+                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Our Product</li>
+                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Our Blog</li>
+                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Contact Us</li>
+            </ul>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                class="w-10 h-10 cursor-pointer md:hidden" @click="toggleMenu">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </div>
     </div>
 </template>
 
@@ -84,3 +103,4 @@ window.addEventListener('scroll', handleScroll)
     color: #3E8914;
 }
 </style>
+

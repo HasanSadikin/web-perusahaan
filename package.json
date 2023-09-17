@@ -10,10 +10,20 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^3.0.2",
     "@astrojs/tailwind": "^5.0.0",
     "@astrojs/vue": "^3.0.0",
+    "@fontsource-variable/oswald": "^5.0.12",
+    "@fontsource-variable/outfit": "^5.0.8",
+    "@fontsource/archivo-black": "^5.0.12",
+    "@material-tailwind/react": "^2.1.2",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
     "astro": "^3.0.10",
+    "astro-feather-icons": "^1.0.2",
     "astro-heroicons": "^0.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.3",
     "vue": "^3.3.4"
   }
