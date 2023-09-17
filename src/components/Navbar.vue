@@ -71,7 +71,7 @@ window.addEventListener('scroll', handleScroll)
             </div>
         </div>
     </div> -->
-    <div class="bg-yellow-500">
+    <div class="bg-yellow-500 sticky top-0 z-10">
         <div class="bg-yellow-500 h-16 w-5/6 flex items-center justify-between mx-auto nav">
             <h1 class="font-bold text-2xl">
                 ANG

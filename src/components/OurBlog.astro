@@ -1,0 +1,33 @@
+---
+import Card from '../components/Card.astro';
+import blog from '../images/blog-1.jpg';
+---
+
+<div class="mx-auto w-5/6 py-10 blog">
+    <h1 class="text-center text-4xl font-extrabold pb-10 uppercase">Our Blog</h1>
+    <div class="grid grid-cols-1 gap-5">
+        <Card myClass="grid grid-cols-1 md:grid-cols-2">
+            <img src={blog.src} class="w-full h-72 object-cover" alt="">
+            <div class="px-5 grid grid-row-8 gap-3 py-5">
+                <div class="row-span-7 overflow-hidden">
+                    <h2 class="text-2xl font-bold mb-5">Azaku Nusantara Resmi Dibuka</h2>
+                    <p class="line-clamp-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, possimus. Tempora doloribus aut, ad nesciunt fugit reprehenderit. Pariatur error molestias similique ipsam sunt enim neque eum quasi! Assumenda, saepe vel.</p>
+                </div>
+                <button class="row-span-1 px-8 py-3 bg-yellow-500 font-bold text-lg">See More</button>
+            </div>
+        </Card>
+        <Card myClass="grid grid-cols-1 md:grid-cols-2">
+            <img src={blog.src} class="w-full h-72 object-cover" alt="">
+            <div class="px-5 grid grid-row-8 gap-3 py-5">
+                <div class="row-span-7 overflow-hidden">
+                    <h2 class="text-2xl font-bold mb-5">Azaku Nusantara Resmi Dibuka</h2>
+                    <p class="line-clamp-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, possimus. Tempora doloribus aut, ad nesciunt fugit reprehenderit. Pariatur error molestias similique ipsam sunt enim neque eum quasi! Assumenda, saepe vel.</p>
+                </div>
+                <button class="row-span-1 px-8 py-3 bg-yellow-500 font-bold text-lg">See More</button>
+            </div>
+        </Card>
+        <div class="flex items-center justify-center pt-5">
+            <button class="px-8 py-3 bg-yellow-500 font-bold">Visit Our Blog</button>
+        </div>
+    </div>
+</div>

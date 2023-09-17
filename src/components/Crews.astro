@@ -1,0 +1,97 @@
+---
+
+import Card from '../components/Card.astro';
+import profile from '../images/profile.jpg';
+
+import { Facebook, Instagram, Twitter } from 'astro-feather-icons'
+---
+
+<div class="mx-auto w-5/6 py-10 crews">
+    <h5 class="text-center text-4xl font-extrabold pb-10 uppercase">Our Crew</h5>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5 md:gap-3">
+        <Card myClass="flex flex-col gap-3 min-h-96 p-5 tracking-tighter">
+            <img src={profile.src} class="w-full aspect-square object-cover rounded-full" alt="">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl text-center font-bold">Haznam Amirullah</h1>
+                <h1 class="text-md text-center text-[#555]">Direktur Utama</h1>
+                <div class="flex gap-3 justify-center items-center pt-5">
+                    <Facebook />
+                    <Instagram />
+                    <Twitter />
+                </div>
+            </div>
+        </Card>
+        <Card myClass="flex flex-col gap-3 min-h-96 p-5 tracking-tighter">
+            <img src={profile.src} class="w-full aspect-square object-cover rounded-full" alt="">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl text-center font-bold">Muhammad Sofyan Ays</h1>
+                <h1 class="text-md text-center text-[#555]">Wakil Direktur</h1>
+                <div class="flex gap-3 justify-center items-center pt-5">
+                    <Facebook />
+                    <Instagram />
+                    <Twitter />
+                </div>
+            </div>
+        </Card>
+        <Card myClass="flex flex-col gap-3 min-h-96 p-5 tracking-tighter">
+            <img src={profile.src} class="w-full aspect-square object-cover rounded-full" alt="">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl text-center font-bold">Nur Rahma Azaliyah</h1>
+                <h1 class="text-md text-center text-[#555]">Bendahara</h1>
+                <div class="flex gap-3 justify-center items-center pt-5">
+                    <Facebook />
+                    <Instagram />
+                    <Twitter />
+                </div>
+            </div>
+        </Card>
+        <Card myClass="flex flex-col gap-3 min-h-96 p-5 tracking-tighter">
+            <img src={profile.src} class="w-full aspect-square object-cover rounded-full" alt="">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl text-center font-bold">Hasan Sadikin</h1>
+                <h1 class="text-md text-center text-[#555]">IT Engineer</h1>
+                <div class="flex gap-3 justify-center items-center pt-5">
+                    <Facebook />
+                    <Instagram />
+                    <Twitter />
+                </div>
+            </div>
+        </Card>
+        <Card myClass="flex flex-col gap-3 min-h-96 p-5 tracking-tighter">
+            <img src={profile.src} class="w-full aspect-square object-cover rounded-full" alt="">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl text-center font-bold">Muh. Syuyono D. Diharjo Ays</h1>
+                <h1 class="text-md text-center text-[#555]">Direktur SDM</h1>
+                <div class="flex gap-3 justify-center items-center pt-5">
+                    <Facebook />
+                    <Instagram />
+                    <Twitter />
+                </div>
+            </div>
+        </Card>
+        <Card myClass="flex flex-col gap-3 min-h-96 p-5 tracking-tighter">
+            <img src={profile.src} class="w-full aspect-square object-cover rounded-full" alt="">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl text-center font-bold">Asyraf</h1>
+                <h1 class="text-md text-center text-[#555]">-</h1>
+                <div class="flex gap-3 justify-center items-center pt-5">
+                    <Facebook />
+                    <Instagram />
+                    <Twitter />
+                </div>
+            </div>
+        </Card>
+        <Card myClass="flex flex-col gap-3 min-h-96 p-5 tracking-tighter">
+            <img src={profile.src} class="w-full aspect-square object-cover rounded-full" alt="">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl text-center font-bold">Aidil</h1>
+                <h1 class="text-md text-center text-[#555]">-</h1>
+                <div class="flex gap-3 justify-center items-center pt-5">
+                    <Facebook />
+                    <Instagram />
+                    <Twitter />
+                </div>
+            </div>
+        </Card>
+    </div>
+</div>

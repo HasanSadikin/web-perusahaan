@@ -1,0 +1,30 @@
+---
+import product1 from '../images/product-1.jpg';
+import product2 from '../images/product-2.jpg';
+import product3 from '../images/product-3.jpg';
+---
+
+
+<div class="md:w-5/6 mx-auto pt-10 product">
+    <h5 class="text-4xl font-extrabold text-center uppercase">Our Product</h5>
+    <div class="grid grid-cols-1 md:grid-cols-3 md:gap-3 pt-10">
+        <div class="aspect-square relative">
+            <img src={product1.src} alt="" class="absolute z-[1] w-full h-full object-cover">
+            <div class="relative z-[2] flex flex-col justify-end h-full p-5">
+                <h1 class="text-white text-2xl font-bold">Coconut</h1>
+            </div>
+        </div>
+        <div class="aspect-square relative">
+            <img src={product2.src} alt="" class="absolute z-[1] w-full h-full object-cover">
+            <div class="relative z-[2] flex flex-col justify-end h-full p-5">
+                <h1 class="text-white text-2xl font-bold">Cloves</h1>
+            </div>
+        </div>
+        <div class="aspect-square relative">
+            <img src={product3.src} alt="" class="absolute z-[1] w-full h-full object-cover">
+            <div class="relative z-[2] flex flex-col justify-end h-full p-5">
+                <h1 class="text-white text-2xl font-bold">Nutmeg</h1>
+            </div>
+        </div>
+    </div>
+</div>
