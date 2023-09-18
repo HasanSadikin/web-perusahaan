@@ -1,0 +1,7 @@
+---
+import { sanityPortableText } from '../sanity/portableText.tsx'
+
+const {portableText, customComponent} = Astro.props;
+---
+
+<Fragment set:html={sanityPortableText(portableText, customComponent)} />

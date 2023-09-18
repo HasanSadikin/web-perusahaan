@@ -73,9 +73,9 @@ window.addEventListener('scroll', handleScroll)
     </div> -->
     <div class="bg-yellow-500 sticky top-0 z-10">
         <div class="bg-yellow-500 h-16 w-5/6 flex items-center justify-between mx-auto nav">
-            <h1 class="font-bold text-2xl">
+            <a class="font-bold text-2xl" href="/">
                 ANG
-            </h1>
+            </a>
             <ul :class="['absolute top-16 w-full h-screen bg-yellow-500 ease-in-out duration-300 md:h-fit md:w-fit md:flex md:items-center md:justify-center md:static md:py-0',
                         toggleClass ? 'left-0' : 'left-[-100%]']">
                 <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Home</li>

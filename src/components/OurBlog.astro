@@ -1,31 +1,52 @@
 ---
+import { custom } from 'astro/zod';
 import Card from '../components/Card.astro';
-import blog from '../images/blog-1.jpg';
+import PortableText from './PortableText.astro';
+
+import { useSanityClient, groq } from 'astro-sanity';
+import { createImageBuilder } from 'astro-sanity';
+
+const imageBuilder = createImageBuilder(useSanityClient())
+
+const urlForImage = (source) => {
+    return imageBuilder.image(source)
+} 
+
+const query = groq`*[_type == "blogs"]|order(_createdAt){
+    _id, name, image, slug, blog
+}`;
+
+const blogs = await useSanityClient().fetch(query)
+
+const customComponent = {
+    block: {
+        normal: ({value}) => `<p>${value.children[0].text}</p>`,
+        h3: ({value}) => `<p>${value.children[0].text}</p>`,
+    }
+}
 ---
 
 <div class="mx-auto w-5/6 py-10 blog">
     <h1 class="text-center text-4xl font-extrabold pb-10 uppercase">Our Blog</h1>
     <div class="grid grid-cols-1 gap-5">
-        <Card myClass="grid grid-cols-1 md:grid-cols-2">
-            <img src={blog.src} class="w-full h-72 object-cover" alt="">
-            <div class="px-5 grid grid-row-8 gap-3 py-5">
-                <div class="row-span-7 overflow-hidden">
-                    <h2 class="text-2xl font-bold mb-5">Azaku Nusantara Resmi Dibuka</h2>
-                    <p class="line-clamp-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, possimus. Tempora doloribus aut, ad nesciunt fugit reprehenderit. Pariatur error molestias similique ipsam sunt enim neque eum quasi! Assumenda, saepe vel.</p>
-                </div>
-                <button class="row-span-1 px-8 py-3 bg-yellow-500 font-bold text-lg">See More</button>
-            </div>
-        </Card>
-        <Card myClass="grid grid-cols-1 md:grid-cols-2">
-            <img src={blog.src} class="w-full h-72 object-cover" alt="">
-            <div class="px-5 grid grid-row-8 gap-3 py-5">
-                <div class="row-span-7 overflow-hidden">
-                    <h2 class="text-2xl font-bold mb-5">Azaku Nusantara Resmi Dibuka</h2>
-                    <p class="line-clamp-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, possimus. Tempora doloribus aut, ad nesciunt fugit reprehenderit. Pariatur error molestias similique ipsam sunt enim neque eum quasi! Assumenda, saepe vel.</p>
-                </div>
-                <button class="row-span-1 px-8 py-3 bg-yellow-500 font-bold text-lg">See More</button>
-            </div>
-        </Card>
+        {
+            blogs.map(blog => (
+                <Card myClass="grid grid-cols-1 md:grid-cols-2">
+                    <img src={urlForImage(blog.image)} class="w-full h-72 object-cover" alt="">
+                    <div class="px-5 grid grid-row-8 gap-3 py-5">
+                        <div class="row-span-7 overflow-hidden">
+                            <h2 class="text-2xl font-bold mb-5">{blog.name}</h2>
+                            <div class="line-clamp-3">
+                                <PortableText portableText={blog.blog} customComponent={customComponent}/>
+                            </div>
+                        </div>
+                        <a href={`/blogs/${blog.slug.current}`} class="row-span-1 px-8 py-3 bg-yellow-500 font-bold text-lg flex justify-center items-center">
+                            See More
+                        </a>
+                    </div>
+                </Card>
+            ))
+        }
         <div class="flex items-center justify-center pt-5">
             <button class="px-8 py-3 bg-yellow-500 font-bold">Visit Our Blog</button>
         </div>

@@ -1,7 +1,7 @@
 ---
-const { myClass } = Astro.props
+const { myClass, link } = Astro.props
 ---
 
-<div class={`shadow-[#444] shadow-lg rounded-md overflow-hidden ${myClass}`}>
+<div class={`shadow-[#444] shadow-lg rounded-md overflow-hidden ${myClass}`}> 
 	<slot />
 </div>

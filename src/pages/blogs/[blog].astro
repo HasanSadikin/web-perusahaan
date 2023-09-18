@@ -1,0 +1,53 @@
+---
+import { useSanityClient, groq, createImageBuilder } from 'astro-sanity';
+
+import PortableText from '../../components/PortableText.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.vue';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const arr: any[] = []
+
+  const query = groq`*[_type == "blogs"]{
+      slug
+  }`;
+
+  const blogs = await useSanityClient().fetch(query)
+  blogs.map(x => arr.push({params: {blog: x.slug.current}}))
+
+  return arr;
+}
+
+const imageBuilder = createImageBuilder(useSanityClient())
+const urlForImage = (source) => {
+    return imageBuilder.image(source)
+} 
+
+const { blog } = Astro.params;
+const query = groq`*[_type == "blogs" && slug.current == "${blog}"]{
+      name, image, blog, slug
+  }`;
+
+const response = await useSanityClient().fetch(query)
+const myBlog = response[0]
+
+const customComponent = 
+{
+  block:{
+    // h3: ({value}) => `${value.children.map(x => '<h3 class="text-3xl font-bold">'+ x.text +'</h3>')}`,
+    h3: ({value}) =>  `<h3 class="text-3xl font-bold">${value.children[0].text}</h3>`,
+  }
+}
+---
+<Layout title="PT. Azaku Nusantara Green">
+	<Navbar client:only/>
+  <div class="w-5/6 mx-auto pb-10">
+    <h1 class="text-5xl font-bold text-center py-10">{myBlog.name}</h1>
+    <div class="flex justify-center pb-10 overflow-hidden rounded-md">
+      <img src={urlForImage(myBlog.image)}  class="h-96 aspect-video object-cover" alt="">
+    </div>
+    <PortableText customComponent={customComponent} portableText={myBlog.blog}/>
+  </div>
+  <Footer />
+</Layout>
