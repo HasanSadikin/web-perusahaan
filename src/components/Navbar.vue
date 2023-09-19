@@ -72,17 +72,37 @@ window.addEventListener('scroll', handleScroll)
         </div>
     </div> -->
     <div class="bg-yellow-500 sticky top-0 z-10">
-        <div class="bg-yellow-500 h-16 w-5/6 flex items-center justify-between mx-auto nav">
+        <div class="bg-yellow-500 h-16 md:w-5/6 md:px-0 px-5 flex items-center justify-between mx-auto nav">
             <a class="font-bold text-2xl" href="/">
                 ANG
             </a>
             <ul :class="['absolute top-16 w-full h-screen bg-yellow-500 ease-in-out duration-300 md:h-fit md:w-fit md:flex md:items-center md:justify-center md:static md:py-0',
                         toggleClass ? 'left-0' : 'left-[-100%]']">
-                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Home</li>
-                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">About Us</li>
-                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Our Product</li>
-                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Our Blog</li>
-                <li class="px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal">Contact Us</li>
+                <li :class="['px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal', props.path == '/' ? 'active' : '']">
+                    <a href="/">
+                        Home
+                    </a>
+                </li>
+                <li :class="['px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal', props.path == '/about-us' ? 'active' : '']">
+                    <a href="/about-us">
+                        About Us
+                    </a>
+                </li>
+                <li :class="['px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal', props.path == '/products' ? 'active' : '']">
+                    <a href="/products">
+                        Our Product
+                    </a>
+                </li>
+                <li :class="['px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal', props.path == '/blogs' ? 'active' : '']">
+                    <a href="/blogs">
+                        Our Blog
+                    </a>
+                </li>
+                <li :class="['px-3 text-lg py-2 text-center cursor-pointer md:py-0 font-semibold md:font-normal', props.path == '/contact-us' ? 'active' : '']">
+                    <a href="/contact-us">
+                        Contact Us
+                    </a>
+                </li>
             </ul>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
                 class="w-10 h-10 cursor-pointer md:hidden" @click="toggleMenu">
@@ -99,8 +119,8 @@ window.addEventListener('scroll', handleScroll)
 
 .active
 {
-    background-color: white;
-    color: #3E8914;
+    background-color: black;
+    color: white;
 }
 </style>
 

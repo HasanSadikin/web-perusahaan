@@ -4,16 +4,10 @@ import Card from '../components/Card.astro';
 import PortableText from './PortableText.astro';
 
 import { useSanityClient, groq } from 'astro-sanity';
-import { createImageBuilder } from 'astro-sanity';
+import { urlForImage, timeAgoString } from '../sanity/sanityUtils.tsx';
 
-const imageBuilder = createImageBuilder(useSanityClient())
-
-const urlForImage = (source) => {
-    return imageBuilder.image(source)
-} 
-
-const query = groq`*[_type == "blogs"]|order(_createdAt){
-    _id, name, image, slug, blog
+const query = groq`*[_type == "blogs"][0...2]|order(_createdAt){
+    _id, name, image, slug, blog, "timeSincePublished": dateTime(now()) - dateTime(_createdAt)
 }`;
 
 const blogs = await useSanityClient().fetch(query)
@@ -24,23 +18,24 @@ const customComponent = {
         h3: ({value}) => `<p>${value.children[0].text}</p>`,
     }
 }
+
+const {header} = Astro.props
 ---
 
 <div class="mx-auto w-5/6 py-10 blog">
-    <h1 class="text-center text-4xl font-extrabold pb-10 uppercase">Our Blog</h1>
+    <h1 class="text-center text-4xl font-extrabold pb-10 uppercase">{header}</h1>
     <div class="grid grid-cols-1 gap-5">
         {
             blogs.map(blog => (
                 <Card myClass="grid grid-cols-1 md:grid-cols-2">
                     <img src={urlForImage(blog.image)} class="w-full h-72 object-cover" alt="">
-                    <div class="px-5 grid grid-row-8 gap-3 py-5">
-                        <div class="row-span-7 overflow-hidden">
-                            <h2 class="text-2xl font-bold mb-5">{blog.name}</h2>
-                            <div class="line-clamp-3">
-                                <PortableText portableText={blog.blog} customComponent={customComponent}/>
-                            </div>
+                    <div class="px-5 flex flex-col gap-3 justify-between py-5">
+                        <h2 class="text-[#555]">{timeAgoString(blog.timeSincePublished)}</h2>
+                        <div class="overflow-hidden h-36">
+                            <h2 class="text-2xl font-bold mb-3 line-clamp-2">{blog.name}</h2>
+                            <PortableText portableText={blog.blog} customComponent={customComponent}/>
                         </div>
-                        <a href={`/blogs/${blog.slug.current}`} class="row-span-1 px-8 py-3 bg-yellow-500 font-bold text-lg flex justify-center items-center">
+                        <a href={`/blogs/${blog.slug.current}`} class="px-8 py-3 bg-yellow-500 font-bold text-lg flex justify-center items-center">
                             See More
                         </a>
                     </div>
@@ -48,7 +43,7 @@ const customComponent = {
             ))
         }
         <div class="flex items-center justify-center pt-5">
-            <button class="px-8 py-3 bg-yellow-500 font-bold">Visit Our Blog</button>
+            <a class="px-8 py-3 bg-yellow-500 font-bold" href="/blogs">Visit Our Blog</a>
         </div>
     </div>
 </div>

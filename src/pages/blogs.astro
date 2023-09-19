@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.astro';
+
+import Card from '../components/Card.astro';
+import PortableText from '../components/PortableText.astro';
+
+import { urlForImage, timeAgoString } from '../sanity/sanityUtils.tsx';
+import { useSanityClient, groq } from 'astro-sanity';
+
+const query = groq`*[_type == "blogs"]|order(_createdAt desc){
+    _id, 
+    name, 
+    image, 
+    slug, 
+    blog, 
+    "timeSincePublished": dateTime(now()) - dateTime(_createdAt)
+}`;
+
+const blogs = await useSanityClient().fetch(query)
+
+const customComponent = {
+    block: {
+        normal: ({value}) => `<p>${value.children[0].text}</p>`,
+        h3: ({value}) => `<p>${value.children[0].text}</p>`,
+    }
+}
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="PT. Azaku Nusantara Green">
+	<Navbar client:only path={currentPath}/>
+    <div class="w-5/6 mx-auto pb-10">
+        <h5 class="text-5xl font-bold uppercase py-10">Blogs</h5>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {
+                blogs.map(blog => (
+                    <Card myClass="grid grid-cols-1">
+                        <img src={urlForImage(blog.image)} class="w-full h-72 object-cover" alt="">
+                        <div class="px-5 flex flex-col gap-3 justify-between py-5">
+                            <h2 class="text-[#555]">{timeAgoString(blog.timeSincePublished)}</h2>
+                            <div class="overflow-hidden h-[9.75rem]">
+                                <h2 class="text-2xl font-bold mb-5 line-clamp-2">{blog.name}</h2>
+                                <PortableText portableText={blog.blog} customComponent={customComponent}/>
+                            </div>
+                            <a href={`/blogs/${blog.slug.current}`} class="px-8 py-3 bg-yellow-500 font-bold text-lg flex justify-center items-center">
+                                See More
+                            </a>
+                        </div>
+                    </Card>
+                ))
+            }
+        </div>
+    </div>
+	<Footer />
+</Layout>

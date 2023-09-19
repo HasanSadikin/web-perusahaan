@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.astro';
+
+import banner from '../images/banner-1.jpg';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="PT. Azaku Nusantara Green">
+	<Navbar client:only path={currentPath}/>
+    <div class="lg:h-screen flex lg:flex-row flex-col mb-10 lg:mb-0">
+        <div class="overflow-hidden w-full h-72 lg:h-full">
+            <img src={banner.src} alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="w-5/6 mx-auto lg:w-full lg:px-32 px-0">
+            <h5 class="text-5xl font-extrabold pt-10 pb-3 md:text-left text-center">Contact Us</h5>
+            <p class="text-2xl font-semibold text-center md:text-left leading-tight">Reach out to us – Your thoughts, our priority.</p> 
+            <div class="pt-10 flex flex-col gap-3">
+                <div class="">
+                    <h2 class="mb-3">Your Name</h2>
+                    <input type="text" class="border border-[#999] px-2 py-2 w-full">
+                </div>
+                <div class="">
+                    <h2 class="mb-3">Your Email</h2>
+                    <input type="text" class="border border-[#999] px-2 py-2 w-full">
+                </div>
+                <div class="">
+                    <h2 class="mb-3">Your Text</h2>
+                    <textarea class="border border-[#999] px-2 py-2 w-full h-32"></textarea>
+                </div>
+                <button class="w-full p-5 bg-yellow-500 pt-5 font-bold">Send</button>
+            </div>
+        </div>
+    </div>
+	<Footer />
+</Layout>

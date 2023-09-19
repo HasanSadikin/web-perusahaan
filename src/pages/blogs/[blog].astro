@@ -5,6 +5,7 @@ import PortableText from '../../components/PortableText.astro';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.vue';
 import Footer from '../../components/Footer.astro';
+import Blog from '../../components/OurBlog.astro';
 
 export async function getStaticPaths() {
   const arr: any[] = []
@@ -25,29 +26,32 @@ const urlForImage = (source) => {
 } 
 
 const { blog } = Astro.params;
-const query = groq`*[_type == "blogs" && slug.current == "${blog}"]{
+const query = groq`*[_type == "blogs" && slug.current == "${blog}"][0]{
       name, image, blog, slug
   }`;
 
-const response = await useSanityClient().fetch(query)
-const myBlog = response[0]
+const myBlog = await useSanityClient().fetch(query)
 
 const customComponent = 
 {
   block:{
     // h3: ({value}) => `${value.children.map(x => '<h3 class="text-3xl font-bold">'+ x.text +'</h3>')}`,
-    h3: ({value}) =>  `<h3 class="text-3xl font-bold">${value.children[0].text}</h3>`,
+    h3: ({value}) =>  `<h3 class="text-3xl font-bold mb-3">${value.children[0].text}</h3>`,
   }
 }
 ---
 <Layout title="PT. Azaku Nusantara Green">
 	<Navbar client:only/>
-  <div class="w-5/6 mx-auto pb-10">
-    <h1 class="text-5xl font-bold text-center py-10">{myBlog.name}</h1>
-    <div class="flex justify-center pb-10 overflow-hidden rounded-md">
+  <div class="md:w-5/6 mx-auto ">
+    <h1 class="px-5 md:px-0 text-4xl md:text-5xl font-bold text-center py-10">{myBlog.name}</h1>
+    <div class="flex justify-center pb-10 overflow-hidden">
       <img src={urlForImage(myBlog.image)}  class="h-96 aspect-video object-cover" alt="">
     </div>
-    <PortableText customComponent={customComponent} portableText={myBlog.blog}/>
+    <div class="px-5 md:px-0">
+      <PortableText customComponent={customComponent} portableText={myBlog.blog}/>
+    </div>
+    <div class="h-px bg-[#999] w-full mt-10"></div>
   </div>
+  <Blog header="Recent Updates"/>
   <Footer />
 </Layout>
